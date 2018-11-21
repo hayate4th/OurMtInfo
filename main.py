@@ -14,6 +14,7 @@
 
 import os
 import sys
+import search_tools as tools
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
@@ -63,9 +64,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
+    t = tools.get_tuple_by_name(event.message.text)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="アヤヤッヤヤッヤヤヤッヤヤッヤッヤヤァァァアァアァ！！")
+        TextSendMessage(text=str(t))
     )
 
 
